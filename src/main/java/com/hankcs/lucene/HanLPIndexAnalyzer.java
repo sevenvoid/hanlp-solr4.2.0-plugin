@@ -1,8 +1,9 @@
 package com.hankcs.lucene;
 
-import com.hankcs.hanlp.HanLP;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.Tokenizer;
+
+import core.HanLP;
 
 import java.io.Reader;
 import java.util.Set;

@@ -6,7 +6,7 @@ import java.util.Set;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.Tokenizer;
 
-import com.hankcs.hanlp.HanLP;
+import core.HanLP;
 
 public class HanLPAnalyzer extends Analyzer
 {

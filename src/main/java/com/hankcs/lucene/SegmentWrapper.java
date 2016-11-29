@@ -10,13 +10,13 @@
  */
 package com.hankcs.lucene;
 
-import com.hankcs.hanlp.seg.Segment;
-import com.hankcs.hanlp.seg.common.Term;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
 import java.util.Scanner;
+
+import core.seg.Segment;
+import core.seg.common.Term;
 
 /**
  * @author hankcs
@@ -109,7 +109,8 @@ public class SegmentWrapper
         return true;
     }
 
-    private static Scanner createScanner(Reader reader)
+    @SuppressWarnings("resource")
+	private static Scanner createScanner(Reader reader)
     {
         return new Scanner(reader).useDelimiter("\n");
     }

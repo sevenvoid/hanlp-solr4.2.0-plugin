@@ -8,6 +8,7 @@ import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
 import org.apache.lucene.analysis.util.TokenizerFactory;
 
+import java.io.File;
 import java.io.StringReader;
 import java.util.Map;
 import java.util.TreeMap;
@@ -17,33 +18,49 @@ public class HanLPTokenizerFactoryTest extends TestCase
 
     public void testCreate() throws Exception
     {
-        Map<String, String> args = new TreeMap<>();
-        args.put("enableTraditionalChineseMode", "true");
-        args.put("enableNormalization", "true");
+    	
+//    	StringBuilder sbInfo = new StringBuilder("========Tips========\n请将HanLP.properties放在下列目录：\n"); // 打印一些友好的tips
+//        String classPath = (String) System.getProperties().get("java.class.path");
+//        if (classPath != null)
+//        {
+//            for (String path : classPath.split(";"))
+//            {
+//                if (new File(path).isDirectory())
+//                {
+//                    sbInfo.append(path).append('\n');
+//                }
+//            }
+//        }
+//        sbInfo.append("Web项目则请放到下列目录：\n" +
+//                              "Webapp/WEB-INF/lib\n" +
+//                              "Webapp/WEB-INF/classes\n" +
+//                              "Appserver/lib\n" +
+//                              "JRE/lib\n");
+//        sbInfo.append("并且编辑root=PARENT/path/to/your/data\n");
+//        sbInfo.append("现在HanLP将尝试从").append(System.getProperties().get("user.dir")).append("读取data……");
+//        System.out.println("hanlp.properties，进入portable模式。若需要自定义HanLP，请按下列提示操作：\n" + sbInfo);
         
-        String text = "大衛貝克漢不僅僅是名著名球員，球場以外，其妻為前" +
-        		"辣妹合唱團成員維多利亞·碧咸，亦由於他擁有" +
-        		"突出外表、百變髮型及正面的形象，以至自己" +
-        		"品牌的男士香水等商品，及長期擔任運動品牌" +
-        		"Adidas的代言人，因此對大眾傳播媒介和時尚界" +
-        		"等方面都具很大的影響力，在足球圈外所獲得的" +
-        		"認受程度可謂前所未見。";
+        Map<String, String> args = new TreeMap<>();
+//        args.put("enableTraditionalChineseMode", "true");
+        args.put("enableNormalization", "true");
+        args.put("enablePlaceRecognize", "true");
+        args.put("enableCustomDictionary", "true");
+//        args.put("enableDebug", "true");
+//        args.put("enableJapaneseNameRecognize", "true");
+//        args.put("customDictionaryPath", "dic/CustomDictionary.txt");
+        args.put("stopWordDictionaryPath", "F:/Solr/hanlp-solr4.2.0-plugin/data/dictionary/stopwords.txt");
+        
+        String text = "家中的长辈";
+//        String text = "云之家是一个专注企业互联网社交的企业,林志玲亮相网友，你们说的不都是没有道理的，BRT快速公交運營公司，不干不净吃了没病";
         
         StringReader reader = new StringReader(text);
         TokenizerFactory factory = new HanLPTokenizerFactory(args);
         Tokenizer tokenizer = factory.create(reader);
-
         tokenizer.reset();
         while (tokenizer.incrementToken())
         {
             CharTermAttribute attribute = tokenizer.getAttribute(CharTermAttribute.class);
-            // 偏移量
-            OffsetAttribute offsetAtt = tokenizer.getAttribute(OffsetAttribute.class);
-            // 距离
-            PositionIncrementAttribute positionAttr = tokenizer.getAttribute(PositionIncrementAttribute.class);
-            // 词性
-            TypeAttribute typeAttr = tokenizer.getAttribute(TypeAttribute.class);
-            System.out.printf("[%d:%d %d] %s/%s\n", offsetAtt.startOffset(), offsetAtt.endOffset(), positionAttr.getPositionIncrement(), attribute, typeAttr.type());
+            System.out.printf("%s\n",attribute);
         }
         tokenizer.close();
         reader.close();

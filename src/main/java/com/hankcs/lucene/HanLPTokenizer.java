@@ -1,15 +1,16 @@
 package com.hankcs.lucene;
 
 
-import com.hankcs.hanlp.collection.trie.bintrie.BinTrie;
-import com.hankcs.hanlp.corpus.tag.Nature;
-import com.hankcs.hanlp.seg.Segment;
-import com.hankcs.hanlp.seg.common.Term;
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
+
+import core.collection.trie.bintrie.BinTrie;
+import core.corpus.tag.Nature;
+import core.seg.Segment;
+import core.seg.common.Term;
 
 import java.io.BufferedReader;
 import java.io.IOException;

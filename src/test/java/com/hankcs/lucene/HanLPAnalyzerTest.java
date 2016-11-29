@@ -85,7 +85,7 @@ public class HanLPAnalyzerTest extends TestCase
         IndexReader ireader = DirectoryReader.open(directory);
         IndexSearcher isearcher = new IndexSearcher(ireader);
         QueryParser parser = new QueryParser(Version.LUCENE_42, "content", analyzer);
-        Query query = parser.parse("和服");
+        Query query = parser.parse("\"[新闻]服\"");
         ScoreDoc[] hits = isearcher.search(query, 300000).scoreDocs;
         assertEquals(1, hits.length);
         for (ScoreDoc scoreDoc : hits)
